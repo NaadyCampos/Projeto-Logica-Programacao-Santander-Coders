@@ -1,0 +1,61 @@
+body {
+    background-color: gainsboro;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 25vh auto;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    gap: 30px;
+    border-radius: 10px;
+    box-shadow:  20px 20px 43px #d5d5d5,
+             -20px -20px 43px #ebebeb;
+}
+
+form>textarea{
+    min-height: 200px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: inset 2px 3px 6px 0px #eaeaea, inset -2px -2px 5px #f0f0f0;
+}
+
+form>input{
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: inset 2px 3px 6px 0px #eaeaea, inset -2px -2px 5px #f0f0f0;
+}
+
+form>label{
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+button{
+    border: none;
+    color: white;
+    background-color: #0288d1;
+    height: auto;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    width: 60%;
+    align-self: center;
+    box-shadow:  7px 7px 14px #d5d5d5;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover{
+    background-color: #0071ae;
+    transform: scale(1.1);
+}
+
+button:active{
+    transform: scale(0.9);
+}

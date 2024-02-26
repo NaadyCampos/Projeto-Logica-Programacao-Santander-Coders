@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="formulario">
+      <label for="assunto">Assunto</label>
+      <input type="text" name="assunto" id="assunto" />
+      <label for="texto">Texto</label>
+      <textarea type="text" name="texto" id="texto" ></textarea>
+      <button type="submit">ENVIAR</button>
+    </form>
+    <script>
+      const enviarEmail = (addressee, subject, body) => {
+        if (!addressee) {
+          return {
+            status: "Error",
+            message:
+              "Um destinatário precisa ser fornecido ao enviar um e-mail.",
+          };
+        }
+
+        if (!subject) {
+          return {
+            status: "Error",
+            message:
+              "O campo de assunto não deveria estar vazio ao enviar um e-mail.",
+          };
+        }
+
+        if (!body) {
+          return {
+            status: "Error",
+            message:
+              "O corpo da mensagem precisa ser fornecido ao enviar um e-mail.",
+          };
+        }
+
+        console.log(
+          `
+          De: news@carstore.com
+          Para: ${addressee}
+          Assunto: ${subject}
+          
+          ${body}
+          
+          CarStore - Aqui você encontra o seu carro novo
+        `
+        );
+
+        return { status: "Sucess", message: "E-mail enviado com sucesso!" };
+      };
+
+      // Lista de clientes
+      const clientes = [
+        { email: "cliente1@exemplo.com", aceitaMarketing: true },
+        { email: "cliente2@exemplo.com", aceitaMarketing: false },
+        { email: "cliente3@exemplo.com", aceitaMarketing: true },
+      ];
+
+      //  Cria variável do tipo Date
+      const now = new Date();
+
+      // Array com os dias da semana
+      const diasSemana = [
+        "domingo",
+        "segunda",
+        "terça",
+        "quarta",
+        "quinta",
+        "sexta",
+        "sábado",
+      ];
+
+      // Função para retornar o dia da semana
+      const diaDaSemana = (now) => {
+        return diasSemana[now.getDay()];
+      };
+
+      // Função para verificar se é segunda feira | Retorna true || false
+      const verificaSegunda = () => {
+        return diaDaSemana(now) === "segunda";
+      };
+
+      // Função para enviar email após verificar a lista de clientes e quais aceitam marketing
+      const enviarEmails = (assunto, texto) => {
+        if (verificaSegunda()) {
+          const clientesAceitamMarketing = clientes.filter(
+            (cliente) => cliente.aceitaMarketing
+          );
+          clientesAceitamMarketing.forEach((cliente) => {
+            try{
+              const response = enviarEmail(cliente.email, assunto, texto);
+                return console.log(response.message);
+            } catch(Error) {
+              console.log(error);
+            }
+          });
+        } else {
+          console.log(
+            "Email não pode ser enviado hoje pois hoje é",
+            diaDaSemana(now)
+          );
+        }
+      };
+
+      document
+        .getElementById("formulario")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          // Atribuí o assunto e o texto de corpo de email do formulário
+          const subjecto = document.getElementById("assunto").value;
+          const textito = document.getElementById("texto").value;
+          enviarEmails(subjecto, textito);
+        });
+    </script>
+  </body>
+</html>
